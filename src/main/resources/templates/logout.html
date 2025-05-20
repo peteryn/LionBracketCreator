@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Logout</h1>
+<form id="logoutForm" action="/logout" method="POST">
+  <!-- CSRF token would be included here in a real application -->
+  <input type="hidden" name="_csrf" value="your-csrf-token">
+
+  <div class="button-group">
+    <button type="submit" class="btn btn-primary" name="logout" value="local">Log Out from This App</button>
+    <button type="submit" class="btn btn-secondary" name="logout" value="global">Log Out from All Connected Apps</button>
+  </div>
+</form>
+
+
+
+</body>
+</html>
