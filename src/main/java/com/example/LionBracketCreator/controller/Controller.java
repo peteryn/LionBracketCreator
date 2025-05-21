@@ -1,7 +1,10 @@
 package com.example.LionBracketCreator.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,6 +27,16 @@ public class Controller {
     @GetMapping("/logout")
     public String logout() {
         return "logout";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard(Model model, @AuthenticationPrincipal OAuth2User oAuth2User, OAuth2AuthenticationToken authentication) {
+        Map<String, Object> attributes = oAuth2User.getAttributes();
+        String provider = authentication.getAuthorizedClientRegistrationId();
+        System.out.println(provider);
+        System.out.println(authentication.getName());
+        model.addAttribute("name", attributes.get("name"));
+        return "dashboard";
     }
 
 }
