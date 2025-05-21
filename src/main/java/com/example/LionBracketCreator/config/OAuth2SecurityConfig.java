@@ -13,14 +13,19 @@ public class OAuth2SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/", "/login/oauth2").permitAll()
+                        .anyRequest().authenticated()
+                )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login/oauth2")
                         .authorizationEndpoint(authorization -> authorization
                                 .baseUri("/login/oauth2/authorization")
                         )
-
                 )
-                .logout((logout) -> logout.logoutUrl("/clog"));
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                );
         return http.build();
     }
 }
