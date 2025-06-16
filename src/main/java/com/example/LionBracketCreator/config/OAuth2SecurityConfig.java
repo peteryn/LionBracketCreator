@@ -20,6 +20,7 @@ public class OAuth2SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/", "/login/oauth2").permitAll()
                         .anyRequest().authenticated()
                 )

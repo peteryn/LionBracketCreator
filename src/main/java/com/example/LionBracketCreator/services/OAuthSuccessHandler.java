@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -27,8 +28,9 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
         String provider = oauthToken.getAuthorizedClientRegistrationId();
         String name = oauthUser.getAttribute("name");
         String toBeHashed = provider + ":" + name;
-        System.out.println("to be hashed: " + toBeHashed);
-        UserEntity userEntity = new UserEntity(toBeHashed, name);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedUserId = encoder.encode(toBeHashed);
+        UserEntity userEntity = new UserEntity(encodedUserId, name);
         userRepository.save(userEntity);
 
         response.sendRedirect("/");
