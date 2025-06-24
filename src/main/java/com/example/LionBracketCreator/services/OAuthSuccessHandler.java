@@ -30,7 +30,7 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
         String toBeHashed = provider + ":" + name;
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedUserId = encoder.encode(toBeHashed);
-        UserEntity userEntity = new UserEntity(encodedUserId, name);
+        UserEntity userEntity = new UserEntity();
         userRepository.save(userEntity);
 
         response.sendRedirect("/");
