@@ -1,7 +1,6 @@
 package com.example.LionBracketCreator;
 
 import com.example.LionBracketCreator.domain.BracketEntity;
-import com.example.LionBracketCreator.domain.BracketTeams.BracketTeams;
 import com.example.LionBracketCreator.domain.TeamEntity;
 import com.example.LionBracketCreator.repositories.BracketRepository;
 import com.example.LionBracketCreator.repositories.TeamRepository;
@@ -14,11 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Set;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
