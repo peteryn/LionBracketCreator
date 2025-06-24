@@ -1,10 +1,7 @@
 package com.example.LionBracketCreator.domain;
 
 import com.example.LionBracketCreator.domain.BracketTeams.BracketTeams;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +22,12 @@ public class BracketEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "bracket")
+    @OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "bracket")
     private Set<BracketTeams> teams;
+
+    public void addTeam(TeamEntity teamEntity, int seed) {
+        BracketTeams bt = new BracketTeams(this, teamEntity, seed);
+        this.teams.add(bt);
+    }
 }
