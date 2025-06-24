@@ -1,26 +1,30 @@
 package com.example.LionBracketCreator.domain;
 
 import com.example.LionBracketCreator.domain.BracketTeams.BracketTeams;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name="teams")
+@ToString(exclude = "brackets")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TeamEntity {
 
+    public TeamEntity(String name) {
+        this.name = name;
+        this.brackets = new HashSet<>();
+    }
+
     @Id
+    @EqualsAndHashCode.Include
     private String name;
 
     private String abbreviatedName;
@@ -32,6 +36,6 @@ public class TeamEntity {
     private String players;
 
     // this one-to-many mappedBy must exist as a field in BracketTeams
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private Set<BracketTeams> brackets;
 }
