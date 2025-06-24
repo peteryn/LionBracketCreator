@@ -5,16 +5,13 @@ import com.example.LionBracketCreator.domain.TeamEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @AllArgsConstructor
 public class BracketTeams {
 
-    public BracketTeams() {
-
-    }
+    public BracketTeams() {}
 
     public BracketTeams(BracketEntity bracket, TeamEntity team, int seed) {
         this.bracket = bracket;
@@ -37,4 +34,9 @@ public class BracketTeams {
     TeamEntity team;
 
     int seed;
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

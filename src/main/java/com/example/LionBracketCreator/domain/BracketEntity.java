@@ -23,7 +23,6 @@ public class BracketEntity {
     private String name;
 
     @OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL)
-//    @OneToMany(mappedBy = "bracket")
     private Set<BracketTeams> teams;
 
     public void addTeam(TeamEntity teamEntity, int seed) {

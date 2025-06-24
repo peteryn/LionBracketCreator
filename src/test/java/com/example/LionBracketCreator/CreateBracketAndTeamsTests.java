@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -33,23 +34,24 @@ public class CreateBracketAndTeamsTests {
     public void test1() {
         TeamEntity team1 = new TeamEntity();
         team1.setName("NRG");
-
         teamRepository.save(team1);
+
+        TeamEntity team2 = new TeamEntity();
+        team2.setName("G2");
+        teamRepository.save(team2);
 
         BracketEntity bracket = BracketEntity.builder()
                 .id("0")
                 .name("Regional 0")
-                .teams(Set.of())
+                .teams(new HashSet<>())
                 .build();
 
-        BracketTeams bt1 = new BracketTeams(bracket, team1, 1);
-        bracket.setTeams(Set.of(bt1));
+        bracket.addTeam(team1, 1);
+        bracket.addTeam(team2, 2);
 
         bracketRepository.save(bracket);
 
         var result = bracketRepository.findById("0");
-//        assertThat(result).isPresent();
-//        assertThat(result.get()).isEqualTo(bracket);
         if (!result.isEmpty()) {
             var a = result.get();
             var bracketTeamsSet = a.getTeams();
