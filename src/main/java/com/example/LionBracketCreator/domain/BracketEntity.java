@@ -4,7 +4,9 @@ import com.example.LionBracketCreator.domain.BracketTeams.BracketTeams;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
 
 @Getter
 @Setter
@@ -25,6 +27,12 @@ public class BracketEntity {
 
     @OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL)
     private Set<BracketTeams> teams;
+
+    public BracketEntity(String id, String name) {
+        this.id = id;
+        this.name = name;
+        this.teams = new HashSet<>();
+    }
 
     public void addTeam(TeamEntity teamEntity, int seed) {
         BracketTeams bt = new BracketTeams(this, teamEntity, seed);

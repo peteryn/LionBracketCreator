@@ -1,0 +1,16 @@
+package com.example.LionBracketCreator.mappers.impl;
+
+import com.example.LionBracketCreator.domain.BracketTeams.BracketTeams;
+import com.example.LionBracketCreator.domain.BracketTeamsDTO;
+import com.example.LionBracketCreator.mappers.OneWayMapper;
+
+public class BracketTeamsMapperImpl implements OneWayMapper<BracketTeams, BracketTeamsDTO> {
+
+    @Override
+    public BracketTeamsDTO mapTo(BracketTeams bracketTeams) {
+        return new BracketTeamsDTO(
+        bracketTeams.getTeam() != null ? bracketTeams.getTeam().getName() : null,
+        bracketTeams.getSeed()
+    );
+    }
+}
