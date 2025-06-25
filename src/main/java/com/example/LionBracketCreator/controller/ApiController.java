@@ -2,9 +2,12 @@ package com.example.LionBracketCreator.controller;
 
 import com.example.LionBracketCreator.domain.BracketDTO;
 import com.example.LionBracketCreator.domain.BracketEntity;
+import com.example.LionBracketCreator.domain.TeamDTO;
+import com.example.LionBracketCreator.domain.TeamEntity;
 import com.example.LionBracketCreator.mappers.Mapper;
-import com.example.LionBracketCreator.repositories.BracketRepository;
+import com.example.LionBracketCreator.mappers.impl.TeamMapper;
 import com.example.LionBracketCreator.services.BracketService;
+import com.example.LionBracketCreator.services.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +19,19 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 public class ApiController {
 
-    private Mapper<BracketEntity, BracketDTO> bracketMapper;
+    private final Mapper<BracketEntity, BracketDTO> bracketMapper;
 
-    private BracketService bracketService;
+    private final Mapper<TeamEntity, TeamDTO> teamMapper;
 
-    public ApiController(Mapper<BracketEntity, BracketDTO> bracketMapper, BracketService bracketService) {
+    private final BracketService bracketService;
+
+    private final TeamService teamService;
+
+    public ApiController(Mapper<BracketEntity, BracketDTO> bracketMapper, BracketService bracketService, TeamService teamService, TeamMapper teamMapper) {
         this.bracketMapper = bracketMapper;
         this.bracketService = bracketService;
+        this.teamService = teamService;
+        this.teamMapper = teamMapper;
     }
 
     @GetMapping("/test")
@@ -46,8 +55,12 @@ public class ApiController {
         }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-//    @GetMapping("/teams/{team_name}")
-//    public TeamDTO getTeam(@PathVariable String team_name) {
-//
-//    }
+    @GetMapping("/teams/{team_name}")
+    public ResponseEntity<TeamDTO> getTeam(@PathVariable("team_name") String teamName) {
+        Optional<TeamEntity> foundTeam = teamService.findOne(teamName);
+        return foundTeam.map(teamEntity -> {
+            TeamDTO teamDTO = teamMapper.mapTo(teamEntity);
+            return new ResponseEntity<>(teamDTO, HttpStatus.OK);
+        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }

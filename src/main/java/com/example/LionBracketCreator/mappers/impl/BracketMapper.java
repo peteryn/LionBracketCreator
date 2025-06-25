@@ -2,15 +2,9 @@ package com.example.LionBracketCreator.mappers.impl;
 
 import com.example.LionBracketCreator.domain.BracketEntity;
 import com.example.LionBracketCreator.domain.BracketDTO;
-import com.example.LionBracketCreator.domain.BracketTeamsDTO;
-import com.example.LionBracketCreator.domain.TeamEntity;
 import com.example.LionBracketCreator.mappers.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.stream.Collectors;
 
 @Component
 public class BracketMapper implements Mapper<BracketEntity, BracketDTO> {
@@ -29,13 +23,12 @@ public class BracketMapper implements Mapper<BracketEntity, BracketDTO> {
         BracketDTO bracketDTO = new BracketDTO();
         bracketDTO.setId(bracketEntity.getId());
         bracketDTO.setName(bracketEntity.getName());
-//        ArrayList<BracketTeamsDTO> teams = bracketEntity.getTeams().stream().sorted();
-        var a = bracketEntity.getTeams()
+        var bracketTeamsDTOS = bracketEntity.getTeams()
                 .stream()
                 .sorted()
                 .map(this.bracketTeamsMapper::mapTo)
                 .toList();
-        bracketDTO.setTeams(a);
+        bracketDTO.setTeams(bracketTeamsDTOS);
         return bracketDTO;
     }
 
