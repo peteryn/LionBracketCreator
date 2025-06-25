@@ -16,6 +16,6 @@ public class TeamService {
     }
 
     public Optional<TeamEntity> findOne(String teamName) {
-        return this.teamRepository.findById(teamName);
+        return this.teamRepository.findById(teamName.toLowerCase());
     }
 }

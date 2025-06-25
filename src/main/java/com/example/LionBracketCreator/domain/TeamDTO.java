@@ -13,6 +13,8 @@ public class TeamDTO {
 
     private String name;
 
+    private String displayName;
+
     private String abbreviatedName;
 
     private String imagePath;

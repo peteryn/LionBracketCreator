@@ -1,6 +1,7 @@
 package com.example.LionBracketCreator.domain;
 
 import com.example.LionBracketCreator.domain.BracketTeams.BracketTeams;
+import com.example.LionBracketCreator.util.Utility;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,14 +21,17 @@ import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TeamEntity {
 
-    public TeamEntity(String name) {
-        this.name = name;
+    public TeamEntity(String displayName) {
+        this.name = Utility.removeNonAlphabeticUsingStreams(displayName).toLowerCase();
+        this.displayName = displayName;
         this.brackets = new HashSet<>();
     }
 
     @Id
     @EqualsAndHashCode.Include
     private String name;
+
+    private String displayName;
 
     private String abbreviatedName;
 
