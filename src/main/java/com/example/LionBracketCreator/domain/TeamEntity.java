@@ -1,6 +1,7 @@
 package com.example.LionBracketCreator.domain;
 
 import com.example.LionBracketCreator.domain.BracketTeams.BracketTeams;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +17,7 @@ import java.util.Set;
 @Table(name="teams")
 @ToString(exclude = "brackets")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TeamEntity {
 
     public TeamEntity(String name) {
