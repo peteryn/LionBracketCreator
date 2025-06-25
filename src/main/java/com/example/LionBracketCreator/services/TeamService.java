@@ -18,4 +18,8 @@ public class TeamService {
     public Optional<TeamEntity> findOne(String teamName) {
         return this.teamRepository.findById(teamName.toLowerCase());
     }
+
+    public void createTeam(TeamEntity teamEntity) {
+        this.teamRepository.save(teamEntity);
+    }
 }

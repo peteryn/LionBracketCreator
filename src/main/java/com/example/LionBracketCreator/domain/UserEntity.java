@@ -1,12 +1,12 @@
 package com.example.LionBracketCreator.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +20,11 @@ public class UserEntity {
     private String id;
 
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<TeamEntity> teams;
+
+    public void addTeam(TeamEntity teamEntity) {
+        this.teams.add(teamEntity);
+    }
 }

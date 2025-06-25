@@ -2,6 +2,7 @@ package com.example.LionBracketCreator.services;
 
 import com.example.LionBracketCreator.domain.UserEntity;
 import com.example.LionBracketCreator.repositories.UserRepository;
+import com.example.LionBracketCreator.util.AuthenticationUtility;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,13 +26,12 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
         OAuth2User oauthUser = oauthToken.getPrincipal();
-        String provider = oauthToken.getAuthorizedClientRegistrationId();
-        String name = oauthUser.getAttribute("name");
-        String toBeHashed = provider + ":" + name;
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodedUserId = encoder.encode(toBeHashed);
+
+        String idString = AuthenticationUtility.getIdString(oauthToken);
+
         UserEntity userEntity = new UserEntity();
-        userEntity.setId(encodedUserId);
+        userEntity.setId(idString);
+        String name = oauthUser.getAttribute("name");
         userEntity.setName(name);
         userRepository.save(userEntity);
 
