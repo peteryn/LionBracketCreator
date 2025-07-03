@@ -16,20 +16,34 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name="teams")
-@ToString(exclude = "brackets")
+//@ToString(exclude = "brackets")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TeamEntity {
 
-    public TeamEntity(String displayName) {
-        this.name = Utility.removeNonAlphabeticUsingStreams(displayName).toLowerCase();
-        this.displayName = displayName;
+//    public TeamEntity(String displayName, String userId) {
+//        String name = Utility.removeNonAlphabeticUsingStreams(displayName).toLowerCase();
+//        this.id = new UserTeamKey(userId, name);
+//        this.displayName = displayName;
+////        this.brackets = new HashSet<>();
+//    }
+
+    public TeamEntity(String displayName, UserEntity userEntity) {
+        this.userEntity = userEntity;
+        String name = Utility.removeNonAlphabeticUsingStreams(displayName).toLowerCase();
+        this.id = new UserTeamKey(this.userEntity.getId(), name);
         this.brackets = new HashSet<>();
+        this.displayName = displayName;
     }
 
+//    @Id
+//    @EqualsAndHashCode.Include
+//    private String name;
+
     @Id
+    @EmbeddedId
     @EqualsAndHashCode.Include
-    private String name;
+    private UserTeamKey id;
 
     private String displayName;
 
@@ -46,6 +60,7 @@ public class TeamEntity {
     private Set<BracketTeams> brackets;
 
     @ManyToOne
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 }

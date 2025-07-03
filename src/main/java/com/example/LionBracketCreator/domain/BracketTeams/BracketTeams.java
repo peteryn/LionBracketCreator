@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(exclude = {"bracket", "team"})
+//@ToString(exclude = {"bracket", "team"})
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class BracketTeams implements Comparable<BracketTeams> {
@@ -18,7 +18,7 @@ public class BracketTeams implements Comparable<BracketTeams> {
         this.bracket = bracket;
         this.team = team;
         this.seed = seed;
-        this.id = new BracketTeamsKey(bracket.getId(), team.getName());
+        this.id = new BracketTeamsKey(bracket.getId(), team.getId());
     }
 
     @EmbeddedId
@@ -31,8 +31,9 @@ public class BracketTeams implements Comparable<BracketTeams> {
     BracketEntity bracket;
 
     @ManyToOne
-    @MapsId("teamName")
+    @MapsId("userTeamKey")
     @JoinColumn(name = "team_id")
+    @JoinColumn(name = "user_Id")
     TeamEntity team;
 
     int seed;

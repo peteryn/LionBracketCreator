@@ -1,5 +1,6 @@
 package com.example.LionBracketCreator.domain.BracketTeams;
 
+import com.example.LionBracketCreator.domain.UserTeamKey;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -14,9 +15,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class BracketTeamsKey implements Serializable {
 
-    @Column(name = "bracket_id")
-    String bracketId;
+//    @Column(name = "bracket_id")
+    private String bracketId;
 
-    @Column(name = "team_name")
-    String teamName;
+    private UserTeamKey userTeamKey;
 }

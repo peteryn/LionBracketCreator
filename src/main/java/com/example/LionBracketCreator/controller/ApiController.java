@@ -19,20 +19,20 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 public class ApiController {
 
-    private final Mapper<BracketEntity, BracketDTO> bracketMapper;
-
-    private final Mapper<TeamEntity, TeamDTO> teamMapper;
-
-    private final BracketService bracketService;
-
-    private final TeamService teamService;
-
-    public ApiController(Mapper<BracketEntity, BracketDTO> bracketMapper, BracketService bracketService, TeamService teamService, TeamMapper teamMapper) {
-        this.bracketMapper = bracketMapper;
-        this.bracketService = bracketService;
-        this.teamService = teamService;
-        this.teamMapper = teamMapper;
-    }
+//    private final Mapper<BracketEntity, BracketDTO> bracketMapper;
+//
+//    private final Mapper<TeamEntity, TeamDTO> teamMapper;
+//
+//    private final BracketService bracketService;
+//
+//    private final TeamService teamService;
+//
+//    public ApiController(Mapper<BracketEntity, BracketDTO> bracketMapper, BracketService bracketService, TeamService teamService, TeamMapper teamMapper) {
+//        this.bracketMapper = bracketMapper;
+//        this.bracketService = bracketService;
+//        this.teamService = teamService;
+//        this.teamMapper = teamMapper;
+//    }
 
     @GetMapping("/test")
     public String test() {
@@ -46,21 +46,21 @@ public class ApiController {
         return map;
     }
 
-    @GetMapping("/brackets/{bracket_id}")
-    public ResponseEntity<BracketDTO> getBracket(@PathVariable("bracket_id") String bracket_id) {
-        Optional<BracketEntity> foundBracket = bracketService.findOne(bracket_id);
-        return foundBracket.map(bracketEntity -> {
-            BracketDTO bracketDTO = bracketMapper.mapTo(bracketEntity);
-            return new ResponseEntity<>(bracketDTO, HttpStatus.OK);
-        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    @GetMapping("/teams/{team_name}")
-    public ResponseEntity<TeamDTO> getTeam(@PathVariable("team_name") String teamName) {
-        Optional<TeamEntity> foundTeam = teamService.findOne(teamName);
-        return foundTeam.map(teamEntity -> {
-            TeamDTO teamDTO = teamMapper.mapTo(teamEntity);
-            return new ResponseEntity<>(teamDTO, HttpStatus.OK);
-        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+//    @GetMapping("/brackets/{bracket_id}")
+//    public ResponseEntity<BracketDTO> getBracket(@PathVariable("bracket_id") String bracket_id) {
+//        Optional<BracketEntity> foundBracket = bracketService.findOne(bracket_id);
+//        return foundBracket.map(bracketEntity -> {
+//            BracketDTO bracketDTO = bracketMapper.mapTo(bracketEntity);
+//            return new ResponseEntity<>(bracketDTO, HttpStatus.OK);
+//        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
+//
+//    @GetMapping("/teams/{team_name}")
+//    public ResponseEntity<TeamDTO> getTeam(@PathVariable("team_name") String teamName) {
+//        Optional<TeamEntity> foundTeam = teamService.findOne(teamName);
+//        return foundTeam.map(teamEntity -> {
+//            TeamDTO teamDTO = teamMapper.mapTo(teamEntity);
+//            return new ResponseEntity<>(teamDTO, HttpStatus.OK);
+//        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 }

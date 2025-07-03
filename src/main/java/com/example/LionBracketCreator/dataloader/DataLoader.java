@@ -36,10 +36,10 @@ public class DataLoader implements CommandLineRunner {
 
         userRepository.save(userEntity);
 
-        TeamEntity team1 = new TeamEntity("NRG");
-        TeamEntity team2 = new TeamEntity("G2");
-        TeamEntity team3 = new TeamEntity("C9");
-        TeamEntity team4 = new TeamEntity("SSG");
+        TeamEntity team1 = new TeamEntity("NRG", userEntity);
+        TeamEntity team2 = new TeamEntity("G2", userEntity);
+        TeamEntity team3 = new TeamEntity("C9", userEntity);
+        TeamEntity team4 = new TeamEntity("SSG", userEntity);
         teamRepository.save(team1);
         teamRepository.save(team2);
         teamRepository.save(team3);
@@ -55,7 +55,6 @@ public class DataLoader implements CommandLineRunner {
         userEntity.addTeam(team1);
         bracketRepository.save(bracketEntity);
 
-        teamRepository.save(team1);
         System.out.println("Data inserted");
     }
 }

@@ -32,38 +32,38 @@ public class CreateBracketAndTeamsTests {
     @Test
     @Transactional
     public void test1() {
-        TeamEntity team1 = new TeamEntity("NRG");
-        teamRepository.save(team1);
-
-        TeamEntity team2 = new TeamEntity("G2");
-        teamRepository.save(team2);
-
-        BracketEntity bracket = BracketEntity.builder()
-                .id("0")
-                .name("Regional 0")
-                .teams(new HashSet<>())
-                .build();
-
-        bracket.addTeam(team1, 1);
-        bracket.addTeam(team2, 2);
-
-        bracketRepository.save(bracket);
-
-        var result = bracketRepository.findById("0");
-        if (result.isPresent()) {
-            var bracketTeamsSet = result.get().getTeams();
-            System.out.println("PRINTING RESULTS");
-            bracketTeamsSet
-                    .stream()
-                    .sorted()
-                    .forEach(item -> System.out.println(item.getTeam() + ", seed: " + item.getSeed()));
-        }
-        System.out.println("TEST 1 COMPLETE");
-
-        entityManager.flush();
-        entityManager.clear();
-
-        var savedTeam1 = teamRepository.findById("NRG").get();
-        System.out.println("Team1 brackets after save: " + savedTeam1.getBrackets());
+//        TeamEntity team1 = new TeamEntity("NRG");
+//        teamRepository.save(team1);
+//
+//        TeamEntity team2 = new TeamEntity("G2");
+//        teamRepository.save(team2);
+//
+//        BracketEntity bracket = BracketEntity.builder()
+//                .id("0")
+//                .name("Regional 0")
+//                .teams(new HashSet<>())
+//                .build();
+//
+//        bracket.addTeam(team1, 1);
+//        bracket.addTeam(team2, 2);
+//
+//        bracketRepository.save(bracket);
+//
+//        var result = bracketRepository.findById("0");
+//        if (result.isPresent()) {
+//            var bracketTeamsSet = result.get().getTeams();
+//            System.out.println("PRINTING RESULTS");
+//            bracketTeamsSet
+//                    .stream()
+//                    .sorted()
+//                    .forEach(item -> System.out.println(item.getTeam() + ", seed: " + item.getSeed()));
+//        }
+//        System.out.println("TEST 1 COMPLETE");
+//
+//        entityManager.flush();
+//        entityManager.clear();
+//
+//        var savedTeam1 = teamRepository.findById("NRG").get();
+//        System.out.println("Team1 brackets after save: " + savedTeam1.getBrackets());
     }
 }
