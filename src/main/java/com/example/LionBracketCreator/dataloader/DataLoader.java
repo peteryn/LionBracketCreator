@@ -52,7 +52,10 @@ public class DataLoader implements CommandLineRunner {
         bracketEntity.addTeam(team4, 4);
 
         userEntity.addBracket(bracketEntity);
+        userEntity.addTeam(team1);
         bracketRepository.save(bracketEntity);
+
+        teamRepository.save(team1);
         System.out.println("Data inserted");
     }
 }

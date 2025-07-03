@@ -21,11 +21,12 @@ public class UserEntity {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userEntity")
     private Set<TeamEntity> teams;
 
     public void addTeam(TeamEntity teamEntity) {
         this.teams.add(teamEntity);
+        teamEntity.setUserEntity(this);
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userEntity")

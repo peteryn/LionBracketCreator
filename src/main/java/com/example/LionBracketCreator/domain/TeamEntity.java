@@ -44,4 +44,8 @@ public class TeamEntity {
     // this one-to-many mappedBy must exist as a field in BracketTeams
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private Set<BracketTeams> brackets;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity userEntity;
 }
