@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BracketTeamsDTO {
 
-    private String team_name;
+    private String teamName;
 
     private int seed;
 }
