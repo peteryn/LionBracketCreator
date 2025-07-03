@@ -41,4 +41,8 @@ public class BracketEntity {
         this.teams.add(bt);
         teamEntity.getBrackets().add(bt);
     }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity userEntity;
 }

@@ -27,4 +27,12 @@ public class UserEntity {
     public void addTeam(TeamEntity teamEntity) {
         this.teams.add(teamEntity);
     }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userEntity")
+    private Set<BracketEntity> brackets;
+
+    public void addBracket(BracketEntity bracketEntity) {
+        this.brackets.add(bracketEntity);
+        bracketEntity.setUserEntity(this);
+    }
 }
