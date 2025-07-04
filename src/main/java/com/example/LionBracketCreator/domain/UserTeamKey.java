@@ -4,6 +4,7 @@ import jakarta.persistence.Embeddable;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Embeddable
 @Data
@@ -11,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class UserTeamKey implements Serializable {
 
-    private String userId;
+    private UUID userId;
 
     private String teamId;
 }

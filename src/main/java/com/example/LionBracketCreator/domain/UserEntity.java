@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.UUID;
+
 import java.util.Set;
 
 @Data
@@ -16,10 +19,23 @@ import java.util.Set;
 @Table(name="users")
 public class UserEntity {
 
+    public UserEntity(String name, String provider, String providerId) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.provider = provider;
+        this.providerId = providerId;
+        this.teams = new HashSet<>();
+        this.brackets = new HashSet<>();
+    }
+
     @Id
-    private String id;
+    private UUID id;
 
     private String name;
+
+    private String provider;
+
+    private String providerId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userEntity")
     private Set<TeamEntity> teams;

@@ -9,8 +9,6 @@ import com.example.LionBracketCreator.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -28,11 +26,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setName("test");
-        userEntity.setId("test_id");
-        userEntity.setBrackets(new HashSet<>());
-        userEntity.setTeams(new HashSet<>());
+        UserEntity userEntity = new UserEntity("testUsername", "testProvider", "testProviderId");
 
         userRepository.save(userEntity);
 

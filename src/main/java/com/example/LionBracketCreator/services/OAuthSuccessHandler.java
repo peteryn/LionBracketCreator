@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -24,16 +23,17 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
-        OAuth2User oauthUser = oauthToken.getPrincipal();
+        OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
+        OAuth2User oauthUser = oAuth2AuthenticationToken.getPrincipal();
 
-        String idString = AuthenticationUtility.getIdString(oauthToken);
+        String provider = oAuth2AuthenticationToken.getAuthorizedClientRegistrationId();
+        String providerId = AuthenticationUtility.getProviderId(oAuth2AuthenticationToken);
 
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(idString);
-        String name = oauthUser.getAttribute("name");
-        userEntity.setName(name);
-        userRepository.save(userEntity);
+        if (!userRepository.existsByProviderAndProviderId(provider, providerId)) {
+            String name = oauthUser.getAttribute("name");
+            UserEntity userEntity = new UserEntity(name, provider, providerId);
+            userRepository.save(userEntity);
+        }
 
         response.sendRedirect("/");
     }
