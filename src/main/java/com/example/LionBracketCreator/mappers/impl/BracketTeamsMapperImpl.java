@@ -11,8 +11,9 @@ public class BracketTeamsMapperImpl implements OneWayMapper<BracketTeams, Bracke
     @Override
     public BracketTeamsDTO mapTo(BracketTeams bracketTeams) {
         return new BracketTeamsDTO(
-        bracketTeams.getTeam() != null ? bracketTeams.getTeam().getId().getTeamId() : null,
-        bracketTeams.getSeed()
-    );
+                bracketTeams.getId().getUserTeamKey().getUserId(),
+                bracketTeams.getTeam().getDisplayName(),
+                bracketTeams.getSeed()
+        );
     }
 }
