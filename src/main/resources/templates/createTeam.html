@@ -8,6 +8,10 @@
 <h1>Create Teams</h1>
 <form action="#" th:action="@{/create_team}" th:object="${teamDTO}" method="post">
     <p>TeamId: <input type="text" th:field="*{teamId}" /></p>
+    <p>Display Name: <input type="text" th:field="*{displayName}" /></p>
+    <p>Abbreviated Name: <input type="text" th:field="*{abbreviatedName}" /></p>
+    <p>Accent Color: <input type="color" th:field="*{accentColor}" /></p>
+
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 
