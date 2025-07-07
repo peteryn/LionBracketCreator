@@ -5,11 +5,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.util.UUID;
+
 public class AuthenticationUtility {
-    public static String getLoggedInUserId() {
+    public static OAuth2AuthenticationToken getOAuthToken() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
-        return AuthenticationUtility.getProviderId(oauthToken);
+        return oauthToken;
     }
 
     public static String getProviderId(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
@@ -22,5 +24,9 @@ public class AuthenticationUtility {
             providerId = oAuth2User.getAttribute("id").toString();
         }
         return providerId;
+    }
+
+    public static String getProvider(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
+        return oAuth2AuthenticationToken.getAuthorizedClientRegistrationId();
     }
 }

@@ -3,6 +3,7 @@ package com.example.LionBracketCreator.services;
 import com.example.LionBracketCreator.domain.TeamEntity;
 import com.example.LionBracketCreator.domain.UserEntity;
 import com.example.LionBracketCreator.repositories.UserRepository;
+import com.example.LionBracketCreator.util.AuthenticationUtility;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -24,5 +25,12 @@ public class UserService {
 //        userEntity.addTeam(teamEntity);
 //        this.userRepository.save(userEntity);
 //    }
+
+    public Optional<UserEntity> getLoggedInUser() {
+        var oAuthToken = AuthenticationUtility.getOAuthToken();
+        String provider = AuthenticationUtility.getProvider(oAuthToken);
+        String providerId = AuthenticationUtility.getProviderId(oAuthToken);
+        return this.userRepository.findByProviderAndProviderId(provider, providerId);
+    }
 
 }

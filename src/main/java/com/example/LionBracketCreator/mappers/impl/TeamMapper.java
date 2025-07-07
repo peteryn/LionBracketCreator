@@ -13,11 +13,8 @@ public class TeamMapper implements Mapper<TeamEntity, TeamDTO> {
 
     private final ModelMapper modelMapper;
 
-    private final UserRepository userRepository;
-
-    public TeamMapper(ModelMapper modelMapper, UserRepository userRepository) {
+    public TeamMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
-        this.userRepository = userRepository;
     }
 
     @Override
@@ -37,10 +34,6 @@ public class TeamMapper implements Mapper<TeamEntity, TeamDTO> {
     public TeamEntity mapFrom(TeamDTO teamDTO) {
         var teamEntity = modelMapper.map(teamDTO, TeamEntity.class);
         teamEntity.setId(new UserTeamKey(teamDTO.getOwnerId(), teamDTO.getTeamId()));
-        var userEntityOptional = userRepository.findById(teamDTO.getOwnerId());
-        return userEntityOptional.map(userEntity -> {
-            teamEntity.setUserEntity(userEntity);
-            return teamEntity;
-        }).orElse(null);
+        return teamEntity;
     }
 }

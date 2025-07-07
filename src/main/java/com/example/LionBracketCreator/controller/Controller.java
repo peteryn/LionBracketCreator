@@ -69,9 +69,7 @@ public class Controller {
 
     @PostMapping("/create_team")
     public String createTeamSubmit(@ModelAttribute TeamDTO teamDTO, Model model) {
-        String userId = AuthenticationUtility.getLoggedInUserId();
         TeamEntity teamEntity = teamMapper.mapFrom(teamDTO);
-        this.userService.addTeamToUser(userId, teamEntity);
         this.teamService.createTeam(teamEntity);
         return "result";
     }
