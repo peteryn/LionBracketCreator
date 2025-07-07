@@ -15,13 +15,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addTeamToUser(String userId, TeamEntity teamEntity) {
-        Optional<UserEntity> userEntityOptional = this.userRepository.findById(userId);
-        if (userEntityOptional.isEmpty()) {
-            return;
-        }
-        var userEntity = userEntityOptional.get();
-        userEntity.addTeam(teamEntity);
-        this.userRepository.save(userEntity);
-    }
+//    public void addTeamToUser(String userId, TeamEntity teamEntity) {
+//        Optional<UserEntity> userEntityOptional = this.userRepository.findById(userId);
+//        if (userEntityOptional.isEmpty()) {
+//            return;
+//        }
+//        var userEntity = userEntityOptional.get();
+//        userEntity.addTeam(teamEntity);
+//        this.userRepository.save(userEntity);
+//    }
+
 }
