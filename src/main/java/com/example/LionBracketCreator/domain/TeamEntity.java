@@ -16,17 +16,10 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name="teams")
-//@ToString(exclude = "brackets")
+@ToString(exclude = "brackets")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TeamEntity {
-
-//    public TeamEntity(String displayName, String userId) {
-//        String name = Utility.removeNonAlphabeticUsingStreams(displayName).toLowerCase();
-//        this.id = new UserTeamKey(userId, name);
-//        this.displayName = displayName;
-////        this.brackets = new HashSet<>();
-//    }
 
     public TeamEntity(String displayName, UserEntity userEntity) {
         this.userEntity = userEntity;
@@ -35,10 +28,6 @@ public class TeamEntity {
         this.brackets = new HashSet<>();
         this.displayName = displayName;
     }
-
-//    @Id
-//    @EqualsAndHashCode.Include
-//    private String name;
 
     @Id
     @EmbeddedId
