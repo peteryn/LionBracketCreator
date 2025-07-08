@@ -32,11 +32,8 @@ public class TeamService {
     }
 
     public void createTeam(TeamEntity teamEntity) {
-        var userEntityOptional = this.userService.getLoggedInUser();
-        if (userEntityOptional.isEmpty()) {
-            return;
-        }
-        teamEntity.setUserEntity(userEntityOptional.get());
+        var userEntity = this.userService.getLoggedInUser();
+        teamEntity.setUserEntity(userEntity);
 
         this.teamRepository.save(teamEntity);
     }

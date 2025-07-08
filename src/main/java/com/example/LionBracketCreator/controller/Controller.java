@@ -1,9 +1,13 @@
 package com.example.LionBracketCreator.controller;
 
+import com.example.LionBracketCreator.domain.BracketDTO;
+import com.example.LionBracketCreator.domain.BracketEntity;
 import com.example.LionBracketCreator.domain.TeamDTO;
 import com.example.LionBracketCreator.domain.TeamEntity;
 import com.example.LionBracketCreator.mappers.Mapper;
+import com.example.LionBracketCreator.mappers.impl.BracketMapper;
 import com.example.LionBracketCreator.mappers.impl.TeamMapper;
+import com.example.LionBracketCreator.services.BracketService;
 import com.example.LionBracketCreator.services.TeamService;
 import com.example.LionBracketCreator.services.UserService;
 import com.example.LionBracketCreator.util.AuthenticationUtility;
@@ -27,12 +31,15 @@ public class Controller {
 
     private final Mapper<TeamEntity, TeamDTO> teamMapper;
 
-    private final UserService userService;
+    private final Mapper<BracketEntity, BracketDTO> bracketMapper;
 
-    public Controller(TeamService teamService, Mapper<TeamEntity, TeamDTO> teamMapper, UserService userService) {
+    private final BracketService bracketService;
+
+    public Controller(TeamService teamService, Mapper<TeamEntity, TeamDTO> teamMapper, BracketMapper bracketMapper, BracketService bracketService) {
         this.teamService = teamService;
         this.teamMapper = teamMapper;
-        this.userService = userService;
+        this.bracketMapper = bracketMapper;
+        this.bracketService = bracketService;
     }
 
     @GetMapping("/login/oauth2")
@@ -71,6 +78,19 @@ public class Controller {
     public String createTeamSubmit(@ModelAttribute TeamDTO teamDTO, Model model) {
         TeamEntity teamEntity = teamMapper.mapFrom(teamDTO);
         this.teamService.createTeam(teamEntity);
+        return "result";
+    }
+
+    @GetMapping("/create_bracket")
+    public String createBracketForm(Model model) {
+        model.addAttribute("bracketDTO", new BracketDTO());
+        return "createBracket";
+    }
+
+    @PostMapping("/create_bracket")
+    public String createBracketSubmit(@ModelAttribute BracketDTO bracketDTO, Model model) {
+        BracketEntity bracketEntity = bracketMapper.mapFrom(bracketDTO);
+        this.bracketService.createBracket(bracketEntity);
         return "result";
     }
 

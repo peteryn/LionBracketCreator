@@ -26,11 +26,12 @@ public class UserService {
 //        this.userRepository.save(userEntity);
 //    }
 
-    public Optional<UserEntity> getLoggedInUser() {
+    public UserEntity getLoggedInUser() {
         var oAuthToken = AuthenticationUtility.getOAuthToken();
         String provider = AuthenticationUtility.getProvider(oAuthToken);
         String providerId = AuthenticationUtility.getProviderId(oAuthToken);
-        return this.userRepository.findByProviderAndProviderId(provider, providerId);
+        var optionalUserEntity = this.userRepository.findByProviderAndProviderId(provider, providerId);
+        return optionalUserEntity.orElse(null);
     }
 
 }

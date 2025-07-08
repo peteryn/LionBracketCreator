@@ -9,13 +9,23 @@ import java.util.Optional;
 @Service
 public class BracketService {
 
-    private BracketRepository bracketRepository;
+    private final BracketRepository bracketRepository;
 
-    public BracketService(BracketRepository bracketRepository) {
+    private final UserService userService;
+
+    public BracketService(BracketRepository bracketRepository, UserService userService) {
         this.bracketRepository = bracketRepository;
+        this.userService = userService;
     }
 
     public Optional<BracketEntity> findOne(String bracketId) {
         return bracketRepository.findById(bracketId);
+    }
+
+    public void createBracket(BracketEntity bracketEntity) {
+        // TODO: handle duplicates
+        var user = userService.getLoggedInUser();
+        bracketEntity.setUserEntity(user);
+        this.bracketRepository.save(bracketEntity);
     }
 }

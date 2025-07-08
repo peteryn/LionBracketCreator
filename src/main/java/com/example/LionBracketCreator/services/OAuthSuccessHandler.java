@@ -11,12 +11,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Component
-public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
+public class OAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
     private UserRepository userRepository;
@@ -35,6 +36,7 @@ public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
             userRepository.save(userEntity);
         }
 
-        response.sendRedirect("/");
+        super.onAuthenticationSuccess(request, response, authentication);
+//        response.sendRedirect("/");
     }
 }
