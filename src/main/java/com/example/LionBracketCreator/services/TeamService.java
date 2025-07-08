@@ -7,6 +7,7 @@ import com.example.LionBracketCreator.repositories.TeamRepository;
 import com.example.LionBracketCreator.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,6 +25,10 @@ public class TeamService {
 
     public Optional<TeamEntity> findOne(UUID uuid, String teamName) {
         return this.teamRepository.findById(new UserTeamKey(uuid, teamName));
+    }
+
+    public List<TeamEntity> findAll(UUID uuid) {
+        return this.teamRepository.findById_UserId(uuid);
     }
 
     public void createTeam(TeamEntity teamEntity) {

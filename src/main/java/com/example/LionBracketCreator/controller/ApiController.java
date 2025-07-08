@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -63,5 +64,12 @@ public class ApiController {
             TeamDTO teamDTO = teamMapper.mapTo(teamEntity);
             return new ResponseEntity<>(teamDTO, HttpStatus.OK);
         }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/teams/{user_id}")
+    public ResponseEntity<List<TeamDTO>> getMyTeams(@PathVariable("user_id") UUID uuid) {
+        List<TeamEntity> foundTeams = teamService.findAll(uuid);
+        List<TeamDTO> teamDTOs = foundTeams.stream().map(teamMapper::mapTo).toList();
+        return new ResponseEntity<>(teamDTOs, HttpStatus.OK);
     }
 }
