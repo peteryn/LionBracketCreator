@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -55,9 +56,9 @@ public class ApiController {
         }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/teams/{team_name}")
-    public ResponseEntity<TeamDTO> getTeam(@PathVariable("team_name") String teamName) {
-        Optional<TeamEntity> foundTeam = teamService.findOne(teamName);
+    @GetMapping("/teams/{user_id}/{team_name}")
+    public ResponseEntity<TeamDTO> getTeam(@PathVariable("team_name") String teamName, @PathVariable("user_id") UUID uuid) {
+        Optional<TeamEntity> foundTeam = teamService.findOne(uuid, teamName);
         return foundTeam.map(teamEntity -> {
             TeamDTO teamDTO = teamMapper.mapTo(teamEntity);
             return new ResponseEntity<>(teamDTO, HttpStatus.OK);
