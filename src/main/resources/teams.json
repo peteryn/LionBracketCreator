@@ -1,0 +1,114 @@
+{
+  "Karmine Corp": {
+    "name": "Karmine Corp",
+    "path": "karmine_corp",
+    "players": ["Vatira", "Atow", "Drali"],
+    "abbreviatedName": "Karmine Corp",
+    "color": "#00ccff"
+  },
+  "NRG": {
+    "name": "NRG",
+    "path": "nrg",
+    "players": ["Atomic", "Beastmode", "Daniel"],
+    "abbreviatedName": "NRG",
+    "color": "#F63B00"
+  },
+  "Team Falcons": {
+    "name": "Team Falcons",
+    "path": "falcons",
+    "players": ["trk511", "Rw9", "Kiileerrz"],
+    "abbreviatedName": "Falcons",
+    "color": "#00BD6D"
+  },
+  "Dignitas": {
+    "name": "Dignitas",
+    "path": "dignitas_2025",
+    "players": ["stizzy", "ApparentlyJack", "Joreuz"],
+    "abbreviatedName": "Dignitas",
+    "color": "#87F6FA"
+  },
+  "FURIA": {
+    "name": "FURIA",
+    "path": "furia",
+    "players": ["yANXNZ", "Lostt", "DRUFINHO"],
+    "abbreviatedName": "Furia",
+    "color": "#FFF"
+  },
+  "Team Vitality": {
+    "name": "Team Vitality",
+    "path": "vitality",
+    "players": ["zen", "M0nkey M00n", "ExoTiik"],
+    "abbreviatedName": "Vitality",
+    "color": "#FEFF00"
+  },
+  "Spacestation Gaming": {
+    "name": "Spacestation Gaming",
+    "path": "ssg",
+    "players": ["Scrzbbles", "reveal", "kofyr"],
+    "abbreviatedName": "SSG",
+    "color": "#F5B11B"
+  },
+  "Gentle Mates Alpine": {
+    "name": "Gentle Mates Alpine",
+    "path": "mates",
+    "players": ["Seikoo", "juicy", "yujin"],
+    "abbreviatedName": "M8s",
+    "color": "#FFF"
+  },
+  "Wildcard": {
+    "name": "Wildcard",
+    "path": "wildcard",
+    "players": ["Fever", "Torsos", "bananahead"],
+    "abbreviatedName": "Wildcard",
+    "color": "#1DABF9"
+  },
+  "Gen.G Mobil1 Racing": {
+    "name": "Gen.G Mobil1 Racing",
+    "path": "geng",
+    "players": ["MaJicBear", "CHEESE.", "justin."],
+    "abbreviatedName": "GEN.G",
+    "color": "#A4822E"
+  },
+  "Team Secret": {
+    "name": "Team Secret",
+    "path": "team_secret",
+    "players": ["kv1", "swiftt", "Motta"],
+    "abbreviatedName": "Team Secret",
+    "color": "#FFF"
+  },
+  "Twisted Minds": {
+    "name": "Twisted Minds",
+    "path": "twisted_minds",
+    "players": ["Nwpo", "rise.", "AtomiK"],
+    "abbreviatedName": "Twisted Minds",
+    "color": "#FA4968"
+  },
+  "TSM": {
+    "name": "TSM",
+    "path": "tsm",
+    "players": ["Superlachie", "Amphis", "kaka"],
+    "abbreviatedName": "TSM",
+    "color": "#FFF"
+  },
+  "The Ultimates": {
+    "name": "The Ultimates",
+    "path": "the_ultimates",
+    "players": ["Firstkiller", "Lj", "Chronic"],
+    "abbreviatedName": "The Ultimates",
+    "color": "#A90000"
+  },
+  "Virtus.pro": {
+    "name": "Virtus.pro",
+    "path": "virtus_pro",
+    "players": ["Catalysm", "Sosa", "Sphinx"],
+    "abbreviatedName": "Virtus.pro",
+    "color": "#FE4E00"
+  },
+  "FUT Esports": {
+    "name": "FUT Esports",
+    "path": "fut_esports",
+    "players": ["VKSailen", "Leoro", "TORRES8232"],
+    "abbreviatedName": "FUT Esports",
+    "color": "#ED1438"
+  }
+}
