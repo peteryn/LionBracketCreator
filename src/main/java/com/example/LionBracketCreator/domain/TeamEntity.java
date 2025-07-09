@@ -27,6 +27,7 @@ public class TeamEntity {
         this.id = new UserTeamKey(this.userEntity.getId(), name);
         this.brackets = new HashSet<>();
         this.displayName = displayName;
+        this.players = new HashSet<>();
     }
 
     @Id
@@ -42,7 +43,12 @@ public class TeamEntity {
 
     private String accentColor;
 
-    private String players;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<PlayerEntity> players;
+
+    public void addPlayer(PlayerEntity playerEntity) {
+        this.players.add(playerEntity);
+    }
 
     // this one-to-many mappedBy must exist as a field in BracketTeams
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)

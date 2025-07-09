@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -25,5 +26,5 @@ public class TeamDTO {
 
     private String accentColor;
 
-    private String players;
+    private Set<PlayerEntity> players;
 }

@@ -1,6 +1,7 @@
 package com.example.LionBracketCreator.dataloader;
 
 import com.example.LionBracketCreator.domain.BracketEntity;
+import com.example.LionBracketCreator.domain.PlayerEntity;
 import com.example.LionBracketCreator.domain.TeamEntity;
 import com.example.LionBracketCreator.domain.UserEntity;
 import com.example.LionBracketCreator.repositories.BracketRepository;
@@ -11,6 +12,7 @@ import com.example.LionBracketCreator.services.TeamService;
 import com.example.LionBracketCreator.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -53,7 +55,15 @@ public class DataLoader implements CommandLineRunner {
         userEntity.setId(this.superUserUUID);
         userRepository.save(userEntity);
 
+        PlayerEntity p1 = new PlayerEntity("Beastmode");
+        PlayerEntity p2 = new PlayerEntity("Atomic");
+        PlayerEntity p3 = new PlayerEntity("Daniel");
+
         TeamEntity team1 = new TeamEntity("NRG", userEntity);
+        team1.addPlayer(p1);
+        team1.addPlayer(p2);
+        team1.addPlayer(p3);
+
         TeamEntity team2 = new TeamEntity("G2", userEntity);
         TeamEntity team3 = new TeamEntity("C9", userEntity);
         TeamEntity team4 = new TeamEntity("SSG", userEntity);
