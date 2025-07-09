@@ -93,5 +93,4 @@ public class Controller {
         this.bracketService.createBracket(bracketEntity);
         return "result";
     }
-
 }

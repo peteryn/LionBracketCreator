@@ -7,6 +7,7 @@ import com.example.LionBracketCreator.util.AuthenticationUtility;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -32,6 +33,14 @@ public class UserService {
         String providerId = AuthenticationUtility.getProviderId(oAuthToken);
         var optionalUserEntity = this.userRepository.findByProviderAndProviderId(provider, providerId);
         return optionalUserEntity.orElse(null);
+    }
+
+    public Optional<UserEntity> getUserById(UUID uuid) {
+        return this.userRepository.findById(uuid);
+    }
+
+    public boolean userExistsById(UUID uuid) {
+        return this.userRepository.existsById(uuid);
     }
 
 }
