@@ -1,10 +1,9 @@
 package com.example.LionBracketCreator.services;
 
-import com.example.LionBracketCreator.domain.TeamDTO;
 import com.example.LionBracketCreator.domain.TeamEntity;
 import com.example.LionBracketCreator.domain.UserTeamKey;
 import com.example.LionBracketCreator.repositories.TeamRepository;
-import com.example.LionBracketCreator.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +16,9 @@ public class TeamService {
     private final TeamRepository teamRepository;
 
     private final UserService userService;
+
+    @Value("${SUPER_USER_UUID}")
+    private UUID superUserId;
 
     public TeamService(TeamRepository teamRepository, UserService userService) {
         this.teamRepository = teamRepository;
@@ -36,5 +38,9 @@ public class TeamService {
         teamEntity.setUserEntity(userEntity);
 
         this.teamRepository.save(teamEntity);
+    }
+
+    public List<TeamEntity> findAllSuperUserTeams() {
+        return this.findAll(superUserId);
     }
 }
