@@ -26,6 +26,8 @@ public class BracketEntity {
 
     private String name;
 
+    private Integer version;
+
     @OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL)
     private Set<BracketTeams> teams;
 

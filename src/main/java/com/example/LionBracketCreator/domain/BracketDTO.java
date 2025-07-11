@@ -17,5 +17,7 @@ public class BracketDTO {
 
     private String name;
 
+    private Integer version;
+
     private List<BracketTeamsDTO> teams;
 }
